@@ -37,8 +37,14 @@ RUN apt-get update && \
       git && \
     mkdir $HOME && \
     mkdir -p $SRCDIR && \
-    cd $SRCDIR && \
-    git clone -b $GNXI_BRANCH https://github.com/breezestars/gnxi.git && \
+    cd $SRCDIR
+
+RUN git clone -b $GNXI_BRANCH https://github.com/breezestars/gnxi.git && \
+    go get -u \
+              github.com/breezestars/gnxi/gnmi_capabilities \
+              github.com/breezestars/gnxi/gnmi_get \
+              github.com/breezestars/gnxi/gnmi_set \
+              github.com/breezestars/gnxi/gnmi_target && \
     go install -v \
           github.com/breezestars/gnxi/gnmi_capabilities \
           github.com/breezestars/gnxi/gnmi_get \
